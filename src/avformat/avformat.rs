@@ -15,6 +15,7 @@ use crate::{
     shared::*,
 };
 
+// Mirrors avformat.h:1269-1501 (FFmpeg 8)
 #[repr(C)]
 struct AVFormatContextRepr {
     av_class: *const ffi::AVClass,
