@@ -245,7 +245,9 @@ impl<'stream> AVFormatContextInput {
     /// Return slice of [`AVStreamRef`].
     pub fn streams(&'stream self) -> &'stream [AVStreamRef<'stream>] {
         let repr = self.as_ptr() as *const AVFormatContextRepr;
-        let streams = unsafe { (*repr).streams as *const *const ffi::AVStream as *const AVStreamRef<'stream> };
+        let streams = unsafe {
+            (*repr).streams as *const *const ffi::AVStream as *const AVStreamRef<'stream>
+        };
         let len = unsafe { (*repr).nb_streams as usize };
 
         #[cfg(debug_assertions)]
@@ -473,7 +475,9 @@ impl<'stream> AVFormatContextOutput {
     /// Return slice of [`AVStreamRef`].
     pub fn streams(&'stream self) -> &'stream [AVStreamRef<'stream>] {
         let repr = self.as_ptr() as *const AVFormatContextRepr;
-        let streams = unsafe { (*repr).streams as *const *const ffi::AVStream as *const AVStreamRef<'stream> };
+        let streams = unsafe {
+            (*repr).streams as *const *const ffi::AVStream as *const AVStreamRef<'stream>
+        };
         let len = unsafe { (*repr).nb_streams as usize };
 
         #[cfg(debug_assertions)]
