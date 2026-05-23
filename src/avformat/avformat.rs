@@ -293,6 +293,24 @@ impl<'stream> AVFormatContextInput {
         let repr = self.as_ptr() as *const AVFormatContextRepr;
         unsafe { NonNull::new((*repr).metadata).map(|x| AVDictionaryRef::from_raw(x)) }
     }
+
+    /// Get number of streams.
+    pub fn nb_streams(&self) -> u32 {
+        let repr = self.as_ptr() as *const AVFormatContextRepr;
+        unsafe { (*repr).nb_streams }
+    }
+
+    /// Get duration of the stream, in AV_TIME_BASE fractional seconds.
+    pub fn duration(&self) -> i64 {
+        let repr = self.as_ptr() as *const AVFormatContextRepr;
+        unsafe { (*repr).duration }
+    }
+
+    /// Get total stream bitrate in bit/s.
+    pub fn bit_rate(&self) -> i64 {
+        let repr = self.as_ptr() as *const AVFormatContextRepr;
+        unsafe { (*repr).bit_rate }
+    }
 }
 
 impl Drop for AVFormatContextInput {
